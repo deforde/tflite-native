@@ -1,0 +1,10 @@
+services:
+  tflite-build-linux:
+    build: .
+    volumes:
+      - type: bind
+        source: ../../bin
+        target: /home/mruser/bin
+      - type: bind
+        source: ../../include
+        target: /home/mruser/include

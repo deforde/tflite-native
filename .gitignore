@@ -1,0 +1,6 @@
+*/build/
+test/c/build/
+.cache/
+pkg/src/*.egg-info/
+.venv/
+__pycache__/
