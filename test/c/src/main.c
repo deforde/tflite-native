@@ -28,6 +28,10 @@ int main() {
   uint8_t output[1] = {0};
   TFLITE_CHECK(TfLiteTensorCopyToBuffer(output_tensor, output, sizeof(output)));
 
+  TfLiteInterpreterDelete(interpreter);
+  TfLiteInterpreterOptionsDelete(options);
+  TfLiteModelDelete(model);
+
   puts("tested OK!");
 
   return 0;
