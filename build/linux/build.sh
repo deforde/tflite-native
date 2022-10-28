@@ -2,8 +2,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-OUTPUT_LIB_VERSION=0.1.0
-
 HOME=/home/mruser
 TENSORFLOW_SRC_DIR=$HOME/tensorflow
 INCLUDE_DIR=$HOME/include
@@ -22,3 +20,19 @@ eval "cmake $CMAKE_ARGS ../tensorflow/tensorflow/lite/c"
 cmake --build . -j 7
 
 mv libtensorflowlite_c.so $OUTPUT_LIB_DIR
+
+cd $INCLUDE_DIR
+cd $TENSORFLOW_SRC_DIR
+HEADERS=$(find . -name "*.h")
+for HEADER in $HEADERS; do
+  HEADER_DIR=$(dirname $HEADER)
+  mkdir -p $INCLUDE_DIR/$HEADER_DIR
+  cp $HEADER $INCLUDE_DIR/$HEADER_DIR
+done
+cd $BUILD_DIR
+HEADERS=$(find . -name "*.h")
+for HEADER in $HEADERS; do
+  HEADER_DIR=$(dirname $HEADER)
+  mkdir -p $INCLUDE_DIR/$HEADER_DIR
+  cp $HEADER $INCLUDE_DIR/$HEADER_DIR
+done
