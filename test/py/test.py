@@ -11,7 +11,7 @@ from lq.tflite import TfLiteInterface
 
 
 _LIB_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "bin", "libtensorflowlite_c.so")
-_MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "model", "model.tflite")
+_MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "model.tflite")
 
 with TfLiteInterface(_LIB_PATH) as tflite:
     var = tflite.TfLiteVersion().decode("utf-8")

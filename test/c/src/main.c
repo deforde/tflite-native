@@ -9,7 +9,7 @@
 #define TFLITE_CHECK(func_call) assert((func_call) == kTfLiteOk);
 
 int main() {
-  TfLiteModel *model = TfLiteModelCreateFromFile("../../model/model.tflite");
+  TfLiteModel *model = TfLiteModelCreateFromFile("../model/model.tflite");
   TfLiteInterpreterOptions* options = TfLiteInterpreterOptionsCreate();
   TfLiteInterpreterOptionsSetNumThreads(options, 2);
 

@@ -3,8 +3,8 @@ services:
     build: .
     volumes:
       - type: bind
-        source: ../../bin
+        source: ../bin
         target: /home/mruser/bin
       - type: bind
-        source: ../../include
+        source: ../include
         target: /home/mruser/include

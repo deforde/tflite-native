@@ -12,13 +12,11 @@ rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
-sed -i "s/common\\.c/common\\.cc/" $TENSORFLOW_SRC_DIR/tensorflow/lite/c/CMakeLists.txt
+sed "s/common\\.c$/common\\.cc$/" $TENSORFLOW_SRC_DIR/tensorflow/lite/c/CMakeLists.txt
 
-PLATFORM="linux"
-# We assume that the host system is an x86_64 machine
-ARCH="x86_64"
 CMAKE_ARGS="-DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_FLAGS='-ffunction-sections -fdata-sections' -DCMAKE_CXX_FLAGS='-ffunction-sections -fdata-sections'"
 eval "cmake $CMAKE_ARGS $TENSORFLOW_SRC_DIR/tensorflow/lite/c"
+exit 0
 cmake --build . -j 7
 
 mv libtensorflowlite_c.so $OUTPUT_LIB_DIR
