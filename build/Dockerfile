@@ -13,7 +13,7 @@ USER mruser
 
 WORKDIR /home/mruser
 
-RUN git clone --depth 1 --branch v2.9.0 https://github.com/tensorflow/tensorflow
+RUN git clone --depth 1 --branch v2.10.0 https://github.com/tensorflow/tensorflow
 
 COPY build.sh /home/mruser/build.sh
 
