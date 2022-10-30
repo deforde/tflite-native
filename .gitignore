@@ -1,4 +1,5 @@
 */build/
+build/tensorflow
 test/c/build/
 .cache/
 pkg/src/*.egg-info/
