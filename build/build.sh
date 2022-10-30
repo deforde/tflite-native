@@ -16,6 +16,7 @@ INCLUDE_DIR=$(realpath $SCRIPT_DIR/../include)
 BUILD_DIR=$SCRIPT_DIR/build
 OUTPUT_LIB_DIR=$(realpath $SCRIPT_DIR/../bin)
 
+mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_FLAGS='-ffunction-sections -fdata-sections' -DCMAKE_CXX_FLAGS='-ffunction-sections -fdata-sections' $TENSORFLOW_SRC_DIR/tensorflow/lite/c
 cmake --build . -j 7
