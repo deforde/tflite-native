@@ -2,20 +2,25 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-HOME=/home/mruser
-TENSORFLOW_SRC_DIR=$HOME/tensorflow
-INCLUDE_DIR=$HOME/include
-BUILD_DIR=$HOME/build
-OUTPUT_LIB_DIR=$HOME/bin
+SCRIPT_DIR=$(realpath ${0%/*})
+cd $SCRIPT_DIR
 
-rm -rf $BUILD_DIR
-mkdir -p $BUILD_DIR
+TENSORFLOW_SRC_DIR=$(realpath $SCRIPT_DIR/tensorflow)
+
+if [[ ! -d $TENSORFLOW_SRC_DIR ]]; then
+  git clone --depth 1 --branch v2.9.0 https://github.com/tensorflow/tensorflow
+  sed "s/common\\.c$/common\\.cc/" tensorflow/tensorflow/lite/c/CMakeLists.txt
+fi
+
+INCLUDE_DIR=$(realpath $SCRIPT_DIR/../include)
+BUILD_DIR=$SCRIPT_DIR/build
+OUTPUT_LIB_DIR=$(realpath $SCRIPT_DIR/../bin)
+
 cd $BUILD_DIR
-
-CMAKE_ARGS="-DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_FLAGS='-ffunction-sections -fdata-sections' -DCMAKE_CXX_FLAGS='-ffunction-sections -fdata-sections'"
-eval "cmake $CMAKE_ARGS $TENSORFLOW_SRC_DIR/tensorflow/lite/c"
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_FLAGS='-ffunction-sections -fdata-sections' -DCMAKE_CXX_FLAGS='-ffunction-sections -fdata-sections' $TENSORFLOW_SRC_DIR/tensorflow/lite/c
 cmake --build . -j 7
 
+mkdir -p $OUTPUT_LIB_DIR
 mv libtensorflowlite_c.so $OUTPUT_LIB_DIR
 
 cd $INCLUDE_DIR
