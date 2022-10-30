@@ -4,5 +4,6 @@
 
 build:
 	mkdir -p bin include
-	cd build/linux
+	cd build
+	docker compose build
 	docker compose up
