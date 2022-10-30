@@ -9,7 +9,7 @@ TENSORFLOW_SRC_DIR=$(realpath $SCRIPT_DIR/tensorflow)
 
 if [[ ! -d $TENSORFLOW_SRC_DIR ]]; then
   git clone --depth 1 --branch v2.9.0 https://github.com/tensorflow/tensorflow
-  sed "s/common\\.c$/common\\.cc/" tensorflow/tensorflow/lite/c/CMakeLists.txt
+  sed -i "s/common\\.c$/common\\.cc/" tensorflow/tensorflow/lite/c/CMakeLists.txt
 fi
 
 INCLUDE_DIR=$(realpath $SCRIPT_DIR/../include)

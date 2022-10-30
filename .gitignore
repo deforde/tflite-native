@@ -5,3 +5,5 @@ test/c/build/
 pkg/src/*.egg-info/
 .venv/
 __pycache__/
+bin/
+include/
